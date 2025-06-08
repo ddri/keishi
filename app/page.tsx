@@ -3,46 +3,12 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Music, Play, ExternalLink, ArrowRight } from "lucide-react"
+import Header from "@/components/header"
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <header className="border-b border-zinc-800 bg-black/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-6">
-          <nav className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-white to-zinc-400 rounded-sm flex items-center justify-center">
-                <Music className="h-4 w-4 text-black" />
-              </div>
-              <span className="text-xl font-light tracking-wider">KEISHI URATA</span>
-            </Link>
-            <div className="hidden md:flex space-x-12">
-              <Link href="/" className="text-white hover:text-zinc-300 transition-colors font-light tracking-wide">
-                HOME
-              </Link>
-              <Link
-                href="/discography"
-                className="text-zinc-400 hover:text-white transition-colors font-light tracking-wide"
-              >
-                DISCOGRAPHY
-              </Link>
-              <Link href="/about" className="text-zinc-400 hover:text-white transition-colors font-light tracking-wide">
-                ABOUT
-              </Link>
-              <Link
-                href="/contact"
-                className="text-zinc-400 hover:text-white transition-colors font-light tracking-wide"
-              >
-                CONTACT
-              </Link>
-            </div>
-            <Button variant="ghost" className="md:hidden text-white hover:bg-zinc-900">
-              MENU
-            </Button>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
