@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -88,7 +89,55 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
         <meta name="color-scheme" content="dark" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'GA_MEASUREMENT_ID', {
+              page_title: document.title,
+              page_location: window.location.href,
+            });
+          `}
+        </Script>
+
+        {/* Web Vitals Monitoring */}
+        <Script id="web-vitals" strategy="afterInteractive">
+          {`
+            function sendToAnalytics(metric) {
+              // Replace with your analytics endpoint
+              console.log('Web Vital:', metric);
+              
+              // Example: Send to Google Analytics
+              if (typeof gtag !== 'undefined') {
+                gtag('event', metric.name, {
+                  value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+                  event_category: 'Web Vitals',
+                  event_label: metric.id,
+                  non_interaction: true,
+                });
+              }
+            }
+
+            // Import and use the web-vitals library
+            import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+              getCLS(sendToAnalytics);
+              getFID(sendToAnalytics);
+              getFCP(sendToAnalytics);
+              getLCP(sendToAnalytics);
+              getTTFB(sendToAnalytics);
+            });
+          `}
+        </Script>
+      </body>
     </html>
   )
 }
