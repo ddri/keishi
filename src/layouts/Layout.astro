@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import StructuredData from '../components/StructuredData.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalUrl?: string;
+  keywords?: string[];
+  page?: 'home' | 'about' | 'contact' | 'press' | 'discography';
+}
+
+const { 
+  title, 
+  description = "Legendary Japanese composer and pioneer of electronic music in anime and media.",
+  ogImage = "/og-default.jpg",
+  ogType = "website",
+  canonicalUrl,
+  keywords = ["Keishi Urata", "Japanese composer", "electronic music", "Akira soundtrack", "cyberpunk music"],
+  page
+} = Astro.props;
+
+const currentUrl = canonicalUrl || Astro.url.href;
+const siteUrl = "https://keishiurata.com";
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(', ')} />
+    <meta name="author" content="Keishi Urata" />
+    <title>{title}</title>
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={currentUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Keishi Urata" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:image" content={fullOgImage} />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@keishiurata" />
+    <meta name="twitter:creator" content="@keishiurata" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImage} />
+    <meta name="twitter:image:alt" content={title} />
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="theme-color" content="#000000" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta name="referrer" content="origin-when-cross-origin" />
+    
+    <!-- Structured Data -->
+    <StructuredData type="Person" page={page} />
+  </head>
+  <body class="min-h-screen bg-black text-white">
+    <slot />
+  </body>
+</html>
+
+<style>
+  html {
+    font-family: system-ui, sans-serif;
+  }
+</style>

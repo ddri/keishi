@@ -1,0 +1,289 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.tsx';
+import ContactForm from '../components/ContactForm.tsx';
+import { Button } from '../components/ui/button.tsx';
+import { Card, CardContent } from '../components/ui/card.tsx';
+import { Music, Mail, Phone, MapPin, Send, ExternalLink, Users, Briefcase } from 'lucide-react';
+---
+
+<Layout 
+  title="Contact - Get In Touch - Keishi Urata" 
+  description="Connect with Keishi Urata for collaborations, bookings, press inquiries, or general correspondence. Professional contact information and response times."
+  ogImage="/og-contact.jpg"
+  ogType="website"
+  keywords={["Keishi Urata contact", "music composer contact", "collaboration inquiries", "booking requests", "press contact", "music licensing"]}
+  page="contact"
+>
+  <div class="min-h-screen bg-black text-white">
+    <Header client:load />
+
+    <!-- Hero Section -->
+    <section class="relative py-32 bg-zinc-950">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-block border border-zinc-800 px-4 py-2 rounded-full mb-8">
+            <span class="text-xs tracking-widest text-zinc-300 uppercase">Get In Touch</span>
+          </div>
+          <h1 class="text-5xl md:text-7xl font-extralight mb-8 tracking-tight">
+            CONTACT
+          </h1>
+          <p class="text-xl md:text-2xl font-light text-zinc-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Connect for collaborations, bookings, press inquiries, or general correspondence
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Information & Form -->
+    <section class="py-24 bg-black">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid lg:grid-cols-2 gap-20">
+            
+            <!-- Contact Information -->
+            <div class="space-y-12">
+              <div>
+                <h2 class="text-4xl md:text-5xl font-extralight mb-8 tracking-tight">
+                  Let's
+                  <br />
+                  <span class="text-zinc-400">Connect</span>
+                </h2>
+                <p class="text-lg text-zinc-300 font-light leading-relaxed mb-8">
+                  Whether you're interested in collaborations, booking performances, media inquiries, 
+                  or simply want to discuss music, I'd love to hear from you.
+                </p>
+              </div>
+
+              <!-- Contact Methods -->
+              <div class="space-y-6">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-zinc-900 rounded-lg flex items-center justify-center">
+                    <Mail className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div class="text-sm text-zinc-400 uppercase tracking-wide">Email</div>
+                    <div class="text-white font-light">contact@keishiurata.com</div>
+                  </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-zinc-900 rounded-lg flex items-center justify-center">
+                    <Users className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div class="text-sm text-zinc-400 uppercase tracking-wide">Management</div>
+                    <div class="text-white font-light">management@keishiurata.com</div>
+                  </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-zinc-900 rounded-lg flex items-center justify-center">
+                    <Briefcase className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div class="text-sm text-zinc-400 uppercase tracking-wide">Press & Media</div>
+                    <div class="text-white font-light">press@keishiurata.com</div>
+                  </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-zinc-900 rounded-lg flex items-center justify-center">
+                    <MapPin className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div class="text-sm text-zinc-400 uppercase tracking-wide">Location</div>
+                    <div class="text-white font-light">Tokyo, Japan</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Response Time -->
+              <div class="bg-zinc-950 border border-zinc-800 rounded-lg p-6">
+                <h3 class="text-xl font-light mb-4 tracking-wide">Response Times</h3>
+                <div class="space-y-3 text-sm text-zinc-400">
+                  <div class="flex justify-between">
+                    <span>General Inquiries</span>
+                    <span class="text-zinc-300">24-48 hours</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Collaboration Requests</span>
+                    <span class="text-zinc-300">3-5 business days</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Press & Media</span>
+                    <span class="text-zinc-300">Same day</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div>
+              <ContactForm client:load />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Media & Links -->
+    <section class="py-24 bg-zinc-950">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <div class="inline-block border border-zinc-800 px-3 py-1 rounded-full mb-6">
+              <span class="text-xs tracking-widest text-zinc-400 uppercase">Connect Online</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extralight tracking-tight">
+              Follow &
+              <br />
+              <span class="text-zinc-400">Listen</span>
+            </h2>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { name: "Spotify", description: "Latest releases and playlists", url: "#" },
+              { name: "Apple Music", description: "Complete discography", url: "#" },
+              { name: "YouTube", description: "Official videos and live performances", url: "#" },
+              { name: "SoundCloud", description: "Experimental tracks and demos", url: "#" }
+            ].map((platform) => (
+              <Card key={platform.name} className="bg-zinc-900 border-zinc-800 hover:border-zinc-600 transition-all duration-300 group cursor-pointer">
+                <CardContent className="p-6 text-center">
+                  <div class="w-12 h-12 bg-gradient-to-br from-white to-zinc-400 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <ExternalLink className="h-6 w-6 text-black" />
+                  </div>
+                  <h3 class="text-lg font-light mb-2 tracking-wide">{platform.name}</h3>
+                  <p class="text-sm text-zinc-400 font-light mb-4">{platform.description}</p>
+                  <Button variant="outline" size="sm" className="border-zinc-600 text-zinc-300 hover:bg-zinc-800">
+                    Visit
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 bg-black">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-16">
+            <div class="inline-block border border-zinc-800 px-3 py-1 rounded-full mb-6">
+              <span class="text-xs tracking-widest text-zinc-400 uppercase">Common Questions</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extralight tracking-tight">
+              Frequently
+              <br />
+              <span class="text-zinc-400">Asked</span>
+            </h2>
+          </div>
+
+          <div class="space-y-6">
+            {[
+              {
+                question: "Are you available for film scoring projects?",
+                answer: "Yes, I'm selective about film projects but always open to discussing interesting opportunities. Please include project details, timeline, and budget considerations in your inquiry."
+              },
+              {
+                question: "Do you offer music production mentorship?",
+                answer: "I occasionally take on mentorship roles for promising electronic music artists. Applications are reviewed quarterly, and positions are extremely limited."
+              },
+              {
+                question: "Can I license your music for commercial use?",
+                answer: "Licensing inquiries should be directed to my management team. Please specify the intended use, duration, and geographic scope for accurate licensing terms."
+              },
+              {
+                question: "Do you perform live concerts?",
+                answer: "I perform select live shows annually, typically at major electronic music festivals or special events. Booking inquiries should be submitted at least 6 months in advance."
+              }
+            ].map((faq, index) => (
+              <Card key={index} className="bg-zinc-950 border-zinc-800">
+                <CardContent className="p-8">
+                  <h3 class="text-xl font-light mb-4 tracking-wide">{faq.question}</h3>
+                  <p class="text-zinc-400 font-light leading-relaxed">{faq.answer}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-950 border-t border-zinc-800 py-20">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-12">
+          <div class="col-span-2">
+            <div class="flex items-center space-x-3 mb-6">
+              <div class="w-6 h-6 bg-gradient-to-br from-white to-zinc-400 rounded-sm flex items-center justify-center">
+                <Music className="h-3 w-3 text-black" />
+              </div>
+              <span class="text-lg font-light tracking-wider">KEISHI URATA</span>
+            </div>
+            <p class="text-zinc-400 max-w-md font-light leading-relaxed">
+              Legendary Japanese composer and pioneer of electronic music in anime and media. Creator of the iconic
+              Akira soundtrack and over 400 musical works.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-white font-light mb-6 tracking-wide">NAVIGATION</h4>
+            <ul class="space-y-3 text-zinc-400 font-light">
+              <li>
+                <a href="/discography" class="hover:text-white transition-colors tracking-wide">
+                  Discography
+                </a>
+              </li>
+              <li>
+                <a href="/about" class="hover:text-white transition-colors tracking-wide">
+                  About
+                </a>
+              </li>
+              <li>
+                <a href="/contact" class="hover:text-white transition-colors tracking-wide">
+                  Contact
+                </a>
+              </li>
+              <li>
+                <a href="/press" class="hover:text-white transition-colors tracking-wide">
+                  Press Kit
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-light mb-6 tracking-wide">PLATFORMS</h4>
+            <ul class="space-y-3 text-zinc-400 font-light">
+              <li>
+                <a href="#" class="hover:text-white transition-colors tracking-wide">
+                  Spotify
+                </a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors tracking-wide">
+                  Apple Music
+                </a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors tracking-wide">
+                  YouTube
+                </a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors tracking-wide">
+                  SoundCloud
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-zinc-800 mt-16 pt-8 text-center text-zinc-500 font-light tracking-wide">
+          <p>&copy; {new Date().getFullYear()} KEISHI URATA. ALL RIGHTS RESERVED.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</Layout>

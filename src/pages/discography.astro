@@ -1,0 +1,421 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.tsx';
+import MusicPlayer from '../components/MusicPlayer.tsx';
+import { Button } from '../components/ui/button.tsx';
+import { Card, CardContent } from '../components/ui/card.tsx';
+import { Badge } from '../components/ui/badge.tsx';
+import { Music, Play, ExternalLink, Calendar, Clock } from 'lucide-react';
+import { musicTracks } from '../data/musicData';
+
+// Albums data
+const albums = [
+  {
+    title: "AKIRA ORIGINAL SOUNDTRACK",
+    year: "1988",
+    type: "Symphonic Suite",
+    description: "The legendary masterpiece that redefined anime music through complex orchestral and electronic fusion.",
+    tracks: 12,
+    duration: "68:34",
+    image: "/placeholder.svg?height=400&width=400",
+    featured: true
+  },
+  {
+    title: "NEO-TOKYO CHRONICLES",
+    year: "1985",
+    type: "Electronic",
+    description: "Early exploration of cyberpunk themes through innovative synthesizer compositions and ambient textures.",
+    tracks: 10,
+    duration: "52:18",
+    image: "/placeholder.svg?height=400&width=400",
+    featured: true
+  },
+  {
+    title: "SYNTHESIZED DREAMS",
+    year: "1992",
+    type: "Ambient Electronic",
+    description: "Atmospheric compositions showcasing mastery of electronic textures and melodic innovation.",
+    tracks: 8,
+    duration: "45:22",
+    image: "/placeholder.svg?height=400&width=400",
+    featured: true
+  },
+  {
+    title: "GHOST IN THE MACHINE",
+    year: "1990",
+    type: "Film Score",
+    description: "Haunting electronic score exploring themes of consciousness and digital existence.",
+    tracks: 14,
+    duration: "73:45",
+    image: "/placeholder.svg?height=400&width=400",
+    featured: false
+  },
+  {
+    title: "DIGITAL EVOLUTION",
+    year: "1995",
+    type: "Concept Album",
+    description: "A musical journey through the digital revolution and its impact on human consciousness.",
+    tracks: 11,
+    duration: "61:33",
+    image: "/placeholder.svg?height=400&width=400",
+    featured: false
+  },
+  {
+    title: "TOKYO NIGHTS",
+    year: "1987",
+    type: "Ambient",
+    description: "Nocturnal soundscapes capturing the essence of Tokyo's neon-lit streets and underground culture.",
+    tracks: 9,
+    duration: "48:17",
+    image: "/placeholder.svg?height=400&width=400",
+    featured: false
+  }
+];
+
+const featuredAlbums = albums.filter(album => album.featured);
+const otherAlbums = albums.filter(album => !album.featured);
+---
+
+<Layout 
+  title="Discography - Complete Musical Works - Keishi Urata" 
+  description="Explore the complete discography of Keishi Urata, featuring the legendary Akira soundtrack and over 40 years of groundbreaking electronic music compositions."
+  ogImage="/og-discography.jpg"
+  ogType="website"
+  keywords={["Keishi Urata discography", "Akira soundtrack", "electronic music albums", "Japanese composer music", "cyberpunk music", "anime soundtracks", "synthesizer music"]}
+  page="discography"
+>
+  <div class="min-h-screen bg-black text-white">
+    <Header client:load />
+
+    <!-- Hero Section -->
+    <section class="relative py-32 bg-zinc-950">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-block border border-zinc-800 px-4 py-2 rounded-full mb-8">
+            <span class="text-xs tracking-widest text-zinc-300 uppercase">Musical Works</span>
+          </div>
+          <h1 class="text-5xl md:text-7xl font-extralight mb-8 tracking-tight">
+            DISCOGRAPHY
+          </h1>
+          <p class="text-xl md:text-2xl font-light text-zinc-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Four decades of groundbreaking electronic music, from the legendary Akira soundtrack to experimental ambient works
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Albums -->
+    <section class="py-24 bg-black">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-20">
+            <div class="inline-block border border-zinc-800 px-3 py-1 rounded-full mb-6">
+              <span class="text-xs tracking-widest text-zinc-400 uppercase">Essential Listening</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extralight tracking-tight">
+              Featured
+              <br />
+              <span class="text-zinc-400">Albums</span>
+            </h2>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            {featuredAlbums.map((album, index) => (
+              <Card key={index} className="bg-zinc-950 border-zinc-800 hover:border-zinc-600 transition-all duration-500 group overflow-hidden">
+                <CardContent className="p-0">
+                  <div class="relative overflow-hidden">
+                    <img
+                      src={album.image}
+                      alt={album.title}
+                      width="400"
+                      height="400"
+                      class="w-full h-80 object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                    />
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                      <Button size="sm" className="bg-white text-black hover:bg-zinc-200 font-light tracking-wide">
+                        <Play className="h-3 w-3 mr-2" />
+                        PLAY
+                      </Button>
+                    </div>
+                  </div>
+                  <div class="p-8">
+                    <div class="text-xs tracking-widest text-zinc-500 uppercase mb-3">{album.year} • {album.type}</div>
+                    <h3 class="text-xl font-light mb-4 tracking-wide">{album.title}</h3>
+                    <p class="text-sm text-zinc-400 font-light leading-relaxed mb-4">
+                      {album.description}
+                    </p>
+                    <div class="flex items-center justify-between text-xs text-zinc-500">
+                      <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-1">
+                          <Music className="h-3 w-3" />
+                          <span>{album.tracks} tracks</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                          <Clock className="h-3 w-3" />
+                          <span>{album.duration}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Complete Discography -->
+    <section class="py-24 bg-zinc-950">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-20">
+            <div class="inline-block border border-zinc-800 px-3 py-1 rounded-full mb-6">
+              <span class="text-xs tracking-widest text-zinc-400 uppercase">Complete Collection</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extralight tracking-tight">
+              All
+              <br />
+              <span class="text-zinc-400">Releases</span>
+            </h2>
+          </div>
+
+          <div class="space-y-6">
+            {albums.map((album, index) => (
+              <Card key={index} className="bg-zinc-900 border-zinc-800 hover:border-zinc-600 transition-all duration-300">
+                <CardContent className="p-0">
+                  <div class="flex flex-col md:flex-row">
+                    <div class="md:w-32 md:h-32 w-full h-48 flex-shrink-0">
+                      <img
+                        src={album.image}
+                        alt={album.title}
+                        width="128"
+                        height="128"
+                        class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                      />
+                    </div>
+                    
+                    <div class="flex-1 p-8">
+                      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex-1">
+                          <div class="flex items-center space-x-4 mb-3">
+                            <Badge className="bg-zinc-800 text-zinc-300 border-zinc-700">
+                              {album.year}
+                            </Badge>
+                            <Badge variant="outline" className="border-zinc-600 text-zinc-400">
+                              {album.type}
+                            </Badge>
+                            {album.featured && (
+                              <Badge className="bg-white text-black font-light">
+                                Featured
+                              </Badge>
+                            )}
+                          </div>
+                          <h3 class="text-xl font-light mb-2 tracking-wide">
+                            {album.title}
+                          </h3>
+                          <p class="text-zinc-400 font-light leading-relaxed mb-4">
+                            {album.description}
+                          </p>
+                          <div class="flex items-center space-x-6 text-sm text-zinc-500">
+                            <div class="flex items-center space-x-1">
+                              <Music className="h-4 w-4" />
+                              <span>{album.tracks} tracks</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                              <Clock className="h-4 w-4" />
+                              <span>{album.duration}</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                          <Button size="sm" className="bg-white text-black hover:bg-zinc-200 font-light tracking-wide">
+                            <Play className="h-3 w-3 mr-2" />
+                            Play
+                          </Button>
+                          <Button size="sm" variant="outline" className="border-zinc-600 text-zinc-300 hover:bg-zinc-800">
+                            <ExternalLink className="h-3 w-3 mr-2" />
+                            View
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div class="text-center mt-16">
+            <p class="text-zinc-400 font-light mb-8">
+              Showing 6 of 25+ studio albums. For the complete catalog including singles, collaborations, and rare releases.
+            </p>
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-zinc-700 text-zinc-300 hover:bg-zinc-900 hover:text-white font-light tracking-wide px-8 py-6"
+            >
+              VIEW COMPLETE CATALOG
+              <ExternalLink className="ml-3 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Tracks with Players -->
+    <section class="py-24 bg-zinc-950">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-20">
+            <div class="inline-block border border-zinc-800 px-3 py-1 rounded-full mb-6">
+              <span class="text-xs tracking-widest text-zinc-400 uppercase">Listen Now</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extralight tracking-tight">
+              Featured
+              <br />
+              <span class="text-zinc-400">Tracks</span>
+            </h2>
+            <p class="text-zinc-400 font-light mt-6 max-w-2xl mx-auto">
+              Stream these iconic tracks directly and discover where to purchase high-quality downloads
+            </p>
+          </div>
+
+          <div class="space-y-12">
+            <MusicPlayer client:load track={musicTracks.akira_theme} />
+            <MusicPlayer client:load track={musicTracks.neo_tokyo} />
+            <MusicPlayer client:load track={musicTracks.digital_awakening} />
+          </div>
+
+          <div class="text-center mt-16">
+            <p class="text-zinc-400 font-light mb-6">
+              Support independent music by purchasing directly from Bandcamp
+            </p>
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-[#1DA0C3] text-[#1DA0C3] hover:bg-[#1DA0C3] hover:text-white font-light tracking-wide px-8 py-6"
+            >
+              VISIT BANDCAMP STORE
+              <ExternalLink className="ml-3 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Streaming Platforms -->
+    <section class="py-24 bg-black">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <div class="inline-block border border-zinc-800 px-3 py-1 rounded-full mb-6">
+              <span class="text-xs tracking-widest text-zinc-400 uppercase">Available On</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extralight tracking-tight">
+              Streaming
+              <br />
+              <span class="text-zinc-400">Platforms</span>
+            </h2>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { name: "Spotify", description: "Latest releases and curated playlists", url: "#" },
+              { name: "Apple Music", description: "Complete discography in high quality", url: "#" },
+              { name: "YouTube Music", description: "Official videos and live performances", url: "#" },
+              { name: "SoundCloud", description: "Rare tracks and experimental works", url: "#" }
+            ].map((platform) => (
+              <Card key={platform.name} className="bg-zinc-950 border-zinc-800 hover:border-zinc-600 transition-all duration-300 group cursor-pointer">
+                <CardContent className="p-6 text-center">
+                  <div class="w-12 h-12 bg-gradient-to-br from-white to-zinc-400 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <ExternalLink className="h-6 w-6 text-black" />
+                  </div>
+                  <h3 class="text-lg font-light mb-2 tracking-wide">{platform.name}</h3>
+                  <p class="text-sm text-zinc-400 font-light mb-4">{platform.description}</p>
+                  <Button variant="outline" size="sm" className="border-zinc-600 text-zinc-300 hover:bg-zinc-800">
+                    Listen
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-950 border-t border-zinc-800 py-20">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-12">
+          <div class="col-span-2">
+            <div class="flex items-center space-x-3 mb-6">
+              <div class="w-6 h-6 bg-gradient-to-br from-white to-zinc-400 rounded-sm flex items-center justify-center">
+                <Music className="h-3 w-3 text-black" />
+              </div>
+              <span class="text-lg font-light tracking-wider">KEISHI URATA</span>
+            </div>
+            <p class="text-zinc-400 max-w-md font-light leading-relaxed">
+              Legendary Japanese composer and pioneer of electronic music in anime and media. Creator of the iconic
+              Akira soundtrack and over 400 musical works.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-white font-light mb-6 tracking-wide">NAVIGATION</h4>
+            <ul class="space-y-3 text-zinc-400 font-light">
+              <li>
+                <a href="/discography" class="hover:text-white transition-colors tracking-wide">
+                  Discography
+                </a>
+              </li>
+              <li>
+                <a href="/about" class="hover:text-white transition-colors tracking-wide">
+                  About
+                </a>
+              </li>
+              <li>
+                <a href="/contact" class="hover:text-white transition-colors tracking-wide">
+                  Contact
+                </a>
+              </li>
+              <li>
+                <a href="/press" class="hover:text-white transition-colors tracking-wide">
+                  Press Kit
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-light mb-6 tracking-wide">PLATFORMS</h4>
+            <ul class="space-y-3 text-zinc-400 font-light">
+              <li>
+                <a href="#" class="hover:text-white transition-colors tracking-wide">
+                  Spotify
+                </a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors tracking-wide">
+                  Apple Music
+                </a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors tracking-wide">
+                  YouTube
+                </a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors tracking-wide">
+                  SoundCloud
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-zinc-800 mt-16 pt-8 text-center text-zinc-500 font-light tracking-wide">
+          <p>&copy; {new Date().getFullYear()} KEISHI URATA. ALL RIGHTS RESERVED.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</Layout>

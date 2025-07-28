@@ -1,0 +1,146 @@
+---
+export interface Props {
+  type: 'Person' | 'MusicAlbum' | 'Organization' | 'WebPage';
+  data?: any;
+  page?: 'home' | 'about' | 'contact' | 'press' | 'discography';
+}
+
+const { type, data, page } = Astro.props;
+
+// Base artist information
+const artistData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Keishi Urata",
+  "alternateName": ["浦田圭志", "Keishi"],
+  "jobTitle": "Composer",
+  "description": "Legendary Japanese composer and pioneer of electronic music in anime and media. Creator of the iconic Akira soundtrack and over 400 musical works.",
+  "birthPlace": {
+    "@type": "Place",
+    "name": "Tokyo, Japan"
+  },
+  "birthDate": "1955",
+  "nationality": "Japanese",
+  "knowsAbout": [
+    "Electronic Music",
+    "Film Scoring",
+    "Anime Music",
+    "Synthesizers",
+    "Music Production",
+    "Cyberpunk Music"
+  ],
+  "genre": [
+    "Electronic Music",
+    "Ambient",
+    "Film Score",
+    "Cyberpunk",
+    "Experimental"
+  ],
+  "url": "https://keishiurata.com",
+  "sameAs": [
+    "https://open.spotify.com/artist/keishi-urata",
+    "https://music.apple.com/artist/keishi-urata",
+    "https://www.youtube.com/channel/keishi-urata",
+    "https://soundcloud.com/keishi-urata"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Independent Artist"
+  }
+};
+
+// Generate page-specific structured data
+let structuredData = {};
+
+if (type === 'Person' || page === 'home' || page === 'about') {
+  structuredData = {
+    ...artistData,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://keishiurata.com" + (page === 'about' ? '/about' : '')
+    },
+    "award": [
+      "Japan Record Award - Best Soundtrack (1989)",
+      "Tokyo International Film Festival - Best Music Score (1990)",
+      "Electronic Music Pioneer Award - Lifetime Achievement (1995)",
+      "Cultural Ambassador - Japanese Arts Council (2000)"
+    ]
+  };
+}
+
+if (page === 'contact') {
+  structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "mainEntity": artistData,
+    "about": artistData,
+    "url": "https://keishiurata.com/contact"
+  };
+}
+
+if (page === 'press') {
+  structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Keishi Urata - Press Kit",
+    "description": "Complete press kit for Keishi Urata including high-resolution photos, biographical information, press materials, and media contact information.",
+    "url": "https://keishiurata.com/press",
+    "mainEntity": artistData,
+    "about": artistData
+  };
+}
+
+if (page === 'discography') {
+  const discographyData = {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Keishi Urata",
+    "description": "Complete discography of legendary Japanese electronic music composer Keishi Urata",
+    "url": "https://keishiurata.com/discography",
+    "member": [artistData],
+    "album": [
+      {
+        "@type": "MusicAlbum",
+        "name": "Akira Original Soundtrack",
+        "datePublished": "1988",
+        "genre": "Symphonic Suite",
+        "description": "The legendary masterpiece that redefined anime music through complex orchestral and electronic fusion.",
+        "byArtist": {
+          "@type": "Person",
+          "name": "Keishi Urata"
+        }
+      },
+      {
+        "@type": "MusicAlbum",
+        "name": "Neo-Tokyo Chronicles",
+        "datePublished": "1985",
+        "genre": "Electronic",
+        "description": "Early exploration of cyberpunk themes through innovative synthesizer compositions and ambient textures.",
+        "byArtist": {
+          "@type": "Person",
+          "name": "Keishi Urata"
+        }
+      },
+      {
+        "@type": "MusicAlbum",
+        "name": "Synthesized Dreams",
+        "datePublished": "1992",
+        "genre": "Ambient Electronic",
+        "description": "Atmospheric compositions showcasing mastery of electronic textures and melodic innovation.",
+        "byArtist": {
+          "@type": "Person",
+          "name": "Keishi Urata"
+        }
+      }
+    ]
+  };
+  structuredData = discographyData;
+}
+
+// Override with custom data if provided
+if (data) {
+  structuredData = { ...structuredData, ...data };
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

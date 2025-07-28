@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://keishiurata.com/sitemap-index.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Disallow admin or sensitive paths (none currently)
+# Disallow: /admin/
+
+# Allow all content for this artist portfolio site
+# Music, press materials, and biographical content should be indexed
