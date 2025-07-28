@@ -1,11 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.tsx';
-import MusicPlayer from '../components/MusicPlayer.tsx';
 import { Button } from '../components/ui/button.tsx';
 import { Card, CardContent } from '../components/ui/card.tsx';
 import { Music, Play, ExternalLink, ArrowRight } from 'lucide-react';
-import { musicTracks } from '../data/musicData';
 ---
 
 <Layout 
@@ -123,33 +121,6 @@ import { musicTracks } from '../data/musicData';
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Featured Track Player -->
-      <section class="py-24 bg-black border-t border-zinc-800">
-        <div class="container mx-auto px-6">
-          <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-              <div class="inline-block border border-zinc-800 px-3 py-1 rounded-full mb-6">
-                <span class="text-xs tracking-widest text-zinc-400 uppercase">Listen Now</span>
-              </div>
-              <h2 class="text-4xl md:text-5xl font-extralight tracking-tight">
-                Experience
-                <br />
-                <span class="text-zinc-400">Akira</span>
-              </h2>
-              <p class="text-zinc-400 font-light mt-6 max-w-2xl mx-auto">
-                Listen to the iconic theme that launched a thousand cyberpunk dreams
-              </p>
-            </div>
-
-            <MusicPlayer 
-              client:load 
-              track={musicTracks.akira_theme}
-              defaultPlatform="spotify"
-            />
           </div>
         </div>
       </section>

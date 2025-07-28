@@ -1,4 +1,4 @@
-import{c as h,j as e,B as u}from"./createLucideIcon.C7EM37Qk.js";import{r as g}from"./index.BVOCwoKb.js";import{C as w,a as j,B as y}from"./badge.CUe6zMNU.js";/**
+import{c as h,j as e,B as u}from"./createLucideIcon.C7EM37Qk.js";import{r as g}from"./index.BVOCwoKb.js";import{C as w,a as j,B as y}from"./card.wJFjtgHu.js";/**
  * @license lucide-react v0.525.0 - ISC
  *
  * This source code is licensed under the ISC license.
